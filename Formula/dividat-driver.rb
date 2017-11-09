@@ -1,9 +1,10 @@
-# setup HOMEBREW_GITHUB_API_TOKEN from https://github.com/settings/tokens with *repo* scope (Full control of private repositories)
+# test formula with `brew install -s ./Formula/dividat-driver.rb`
 class DividatDriver < Formula
   desc ""
   homepage "https://dividat.com"
-  url "https://github.com/dividat/driver-go/archive/develop.zip", :using => GitHubPrivateRepositoryDownloadStrategy
+  url "https://github.com/dividat/driver/archive/develop.zip"
   version "0.1.1"
+  # wait for a tagged release so we can put a valid sha256 here
   # sha256 "fa6e97882146bf21104734f967bf5a4be93f021eca8ded6af410da64a02cd991"
 
   depends_on "go" => :build
