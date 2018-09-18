@@ -57,6 +57,8 @@ Existing release targets:
 
 To deploy a new release run: `make deploy`. This can only be done if you are on `master` or `develop` branch, have correctly tagged the revision and have AWS credentials set in your environment.
 
+Homebrew formula must be updated with newly deployed tag, within `url` directive.
+
 ## Installation
 
 ### Windows
