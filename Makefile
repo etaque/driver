@@ -36,22 +36,28 @@ GO_LDFLAGS = -ldflags "$(STATIC_LINKING_LDFLAGS) -X dividat-driver/server.channe
 CODE_SIGNING_CERT ?= ./keys/codesign.p12
 CHECKSUM_SIGNING_CERT ?= ./keys/checksumsign.private.pem
 
+
+### Build from Nix ########################################
+.PHONY: nix-build
+nix-build: nix/deps.nix build
+
+
 ### Simple build ##########################################
 .PHONY: build
-build: nix/deps.nix
+build:
 	$(GOCROSS_OPTS) CC=$(CC) CXX=$(CXX) go build $(GO_LDFLAGS) -o $(OUT) $(SRC)
 
 
-### Test suite ##########################################
+### Test suite ############################################
 .PHONY: test
-test: build
+test: nix-build
 	npm install
 	npm test
 
 
 ### Helper to quickly run the driver
 .PHONY: run
-run: build
+run: nix-build
 	$(OUT)
 
 ### Helper to start the recorder
